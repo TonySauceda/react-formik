@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { useFormik } from 'formik'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	// Inicializar formik
+	const formik = useFormik({
+		initialValues: {
+			name: '',
+			lastName: '',
+			email: '',
+		},
+		onSubmit: (values) => console.log(values),
+	})
+	return (
+		<div>
+			<form onSubmit={formik.handleSubmit}>
+				<div>
+					<label>Nombre:</label>
+					<input name="name" type="text" onChange={formik.handleChange} value={formik.values.name} />
+				</div>
+				<div>
+					<label>Apellido:</label>
+					<input name="lastName" type="text" onChange={formik.handleChange} value={formik.values.lastName} />
+				</div>
+				<div>
+					<label>Email:</label>
+					<input name="email" type="email" onChange={formik.handleChange} value={formik.values.email} />
+				</div>
+				<button type="submit">Enviar</button>
+			</form>
+		</div>
+	)
 }
 
-export default App;
+export default App
